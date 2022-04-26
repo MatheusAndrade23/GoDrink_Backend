@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  color: #AEFEFF;
+  background-color: #072227;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+.container h1 {
+  margin-top: 150px;
+  font-size: 55px;
+}
+.container > p {
+  margin-top: 20px;
+  font-size: 17px;
+}
+.container a {
+  margin-top: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.container div {
+  display: flex;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-style: italic;
+  color: #4FBDBA;
+}
+.container div span {
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=index.css.map */

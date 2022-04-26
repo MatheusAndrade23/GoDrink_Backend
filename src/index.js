@@ -16,6 +16,17 @@ app.engine(
   })
 );
 
+app.set("views", path.join(__dirname, "/views"));
+app.use(express.static("public"));
+app.set("view engine", "handlebars");
+app.use(cors());
+
+dotenv.config();
+
+app.get('/', (req, res) => {
+  res.render('pages/defaultpage');
+});
+
 //-- Conectar com MongoDbAtlas --//
 mongoose
   .connect(process.env.DB_CONFIG, {
@@ -28,13 +39,6 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
-app.set("views", path.join(__dirname, "/views"));
-app.use(express.static("public"));
-app.set("view engine", "handlebars");
-app.use(cors());
-
-dotenv.config();
 
 //-- Express Config --//
 app.use(
