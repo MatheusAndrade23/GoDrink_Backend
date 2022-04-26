@@ -25,8 +25,7 @@
 }
 .container a {
   margin-top: 10px;
-  text-decoration: underline;
-  cursor: pointer;
+  color: #AEFEFF;
 }
 .container div {
   display: flex;
