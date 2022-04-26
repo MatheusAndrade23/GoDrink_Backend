@@ -23,8 +23,9 @@ app.use(cors());
 
 dotenv.config();
 
+//-- Tela Padrão --//
 app.get('/', (req, res) => {
-  res.render('pages/defaultpage');
+  res.render('pages/defaultpage', {number: 10});
 });
 
 //-- Conectar com MongoDbAtlas --//
