@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+const ApiRoutes = require('./routes/api.js');
+const LoginRoutes = require('./routes/login.js');
+
 const app = express();
 
 app.engine(
@@ -23,7 +26,10 @@ app.use(cors());
 
 dotenv.config();
 
-//-- Tela Padrão --//
+//-- Rotas --//
+app.use('/drink', ApiRoutes)
+app.use('/login', LoginRoutes)
+
 app.get('/', (req, res) => {
   res.render('pages/defaultpage', {number: 10});
 });
