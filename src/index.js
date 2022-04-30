@@ -1,4 +1,5 @@
 //-- Configurações Iniciais --//
+const fetch = require('node-fetch');
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -8,6 +9,7 @@ const cors = require('cors');
 
 const ApiRoutes = require('./routes/api.js');
 const LoginRoutes = require('./routes/login.js');
+const DefaultRoute = require('./routes/default.js');
 
 const app = express();
 
@@ -50,10 +52,7 @@ app.use(express.json());
 //-- Rotas --//
 app.use('/drink', ApiRoutes);
 app.use('/login', LoginRoutes);
-
-app.get('/', (req, res) => {
-  res.render('pages/defaultpage', { number: 10 });
-});
+app.use('/', DefaultRoute);
 
 //-- Entregar uma  Porta --//
 app.listen(process.env.PORT || 5000, () => {
