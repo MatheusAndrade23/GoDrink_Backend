@@ -2,9 +2,10 @@
   "name": "godrink_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
   },
   "author": "",
   "license": "MIT",
@@ -13,6 +14,7 @@
     "express": "^4.17.3",
     "express-handlebars": "^6.0.5",
     "mongoose": "^6.3.1",
+    "node-fetch": "^3.2.4",
     "nodemon": "^2.0.16"
   }
 }

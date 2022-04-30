@@ -1,10 +1,10 @@
 //-- Configurações Iniciais --//
-const path = require("path");
-const express = require("express");
-const exphbs = require("express-handlebars");
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-const cors = require("cors");
+const path = require('path');
+const express = require('express');
+const exphbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const cors = require('cors');
 
 const ApiRoutes = require('./routes/api.js');
 const LoginRoutes = require('./routes/login.js');
@@ -12,27 +12,19 @@ const LoginRoutes = require('./routes/login.js');
 const app = express();
 
 app.engine(
-  "handlebars",
+  'handlebars',
   exphbs.engine({
-    layoutsDir: __dirname + "/views/layouts",
-    defaultLayout: "main",
-  })
+    layoutsDir: __dirname + '/views/layouts',
+    defaultLayout: 'main',
+  }),
 );
 
-app.set("views", path.join(__dirname, "/views"));
-app.use(express.static("public"));
-app.set("view engine", "handlebars");
+app.set('views', path.join(__dirname, '/views'));
+app.use(express.static('public'));
+app.set('view engine', 'handlebars');
 app.use(cors());
 
 dotenv.config();
-
-//-- Rotas --//
-app.use('/drink', ApiRoutes)
-app.use('/login', LoginRoutes)
-
-app.get('/', (req, res) => {
-  res.render('pages/defaultpage', {number: 10});
-});
 
 //-- Conectar com MongoDbAtlas --//
 mongoose
@@ -41,7 +33,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Conectado com MongoDB Atlas!");
+    console.log('Conectado com MongoDB Atlas!');
   })
   .catch((err) => {
     console.log(err.message);
@@ -51,11 +43,19 @@ mongoose
 app.use(
   express.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(express.json());
 
+//-- Rotas --//
+app.use('/drink', ApiRoutes);
+app.use('/login', LoginRoutes);
+
+app.get('/', (req, res) => {
+  res.render('pages/defaultpage', { number: 10 });
+});
+
 //-- Entregar uma  Porta --//
 app.listen(process.env.PORT || 5000, () => {
-  console.log("Aplicação Iniciada!");
+  console.log('Aplicação Iniciada!');
 });
