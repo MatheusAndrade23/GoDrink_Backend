@@ -3,13 +3,13 @@ const User = require('../models/user');
 
 module.exports = class LoginApiController {
   static Login(req, res) {
-    if (!req.body.user || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       res.status(406).json({
-        message: 'Without User or Password',
+        message: 'Without User or Password!',
         error: true,
       });
     } else {
-      User.findOne({ user: req.body.user }, (error, user) => {
+      User.findOne({ email: req.body.email }, (error, user) => {
         if (error) {
           res.status(500).json({
             message: 'Internal Server Error!',
@@ -17,25 +17,30 @@ module.exports = class LoginApiController {
           });
         } else if (user) {
           if (req.body.password === user.password) {
-            res.status(200).json({ message: 'Success', error: false });
+            res
+              .status(200)
+              .json({ message: 'Logged with success!', error: false });
           } else {
-            res.status(401).json({ message: 'Wrong Password', error: true });
+            res.status(401).json({ message: 'Wrong Password!', error: true });
           }
         } else {
-          res.status(406).json({ message: 'User not Found', error: true });
+          res.status(406).json({
+            message: 'User not Found! Please create an account before!',
+            error: true,
+          });
         }
       });
     }
   }
 
   static Register(req, res) {
-    if (!req.body.user || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       res.status(406).json({
-        message: 'Without User or Password',
+        message: 'Without User or Password!',
         error: true,
       });
     } else {
-      User.findOne({ user: req.body.user }, (error, user) => {
+      User.findOne({ user: req.body.email }, (error, user) => {
         if (error) {
           res.status(500).json({
             message: 'Internal Server Error!',
@@ -43,17 +48,17 @@ module.exports = class LoginApiController {
           });
         } else if (user) {
           res.status(406).json({
-            message: 'This User already Exists',
+            message: 'This Email is Already in Use!',
             error: true,
           });
         } else {
           let NewUser = {
-            email: req.body.user,
+            email: req.body.email,
             password: req.body.password,
             favorites: [],
           };
           try {
-            User.crate(NewUser);
+            User.create(NewUser);
             res.status(201).json({
               message: 'User Created with Success!',
               error: false,
