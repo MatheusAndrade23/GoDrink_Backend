@@ -1,5 +1,4 @@
 //-- Configurações Iniciais --//
-const fetch = require('node-fetch');
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
@@ -50,8 +49,8 @@ app.use(
 app.use(express.json());
 
 //-- Rotas --//
-app.use('/drink', ApiRoutes);
-app.use('/login', LoginRoutes);
+app.use('/drink/', ApiRoutes);
+app.use('/login/', LoginRoutes);
 app.use('/', DefaultRoute);
 
 //-- Entregar uma  Porta --//
