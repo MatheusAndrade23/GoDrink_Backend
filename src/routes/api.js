@@ -3,7 +3,9 @@ const router = express.Router();
 
 const ApiController = require('../controllers/ApiController');
 
-router.get('/drink/favorites', ApiController.GetFavorites);
-router.post('/drink/favorites', ApiController.PushFavorite);
+const CheckAuth = require('../middlewares/CheckAuth').checkAuth;
+
+router.get('/favorites', CheckAuth, ApiController.GetFavorites);
+router.post('/favorites', CheckAuth, ApiController.PushFavorite);
 
 module.exports = router;
