@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const User = require('../models/user');
+
 module.exports.checkAuth = (req, res, next) => {
   if (!req.body.email || !req.body.password) {
     res.status(401).json({ message: 'Please log in before!', error: true });
