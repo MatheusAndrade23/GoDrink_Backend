@@ -2,10 +2,9 @@ const express = require('express');
 const router = express.Router();
 
 const ApiController = require('../controllers/ApiController');
+const { checkAuth } = require('../middlewares/CheckAuth');
 
-const CheckAuth = require('../middlewares/CheckAuth').checkAuth;
-
-router.post('/favorites', CheckAuth, ApiController.GetFavorites);
-router.patch('/favorites', CheckAuth, ApiController.ManageFavorites);
+router.get('/favorites/:id', checkAuth, ApiController.GetFavorites);
+router.patch('/favorites/:id', checkAuth, ApiController.ManageFavorites);
 
 module.exports = router;
