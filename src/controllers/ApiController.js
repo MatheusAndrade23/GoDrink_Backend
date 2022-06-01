@@ -3,60 +3,46 @@ const User = require('../models/user');
 
 module.exports = class ApiController {
   static GetFavorites = async (req, res) => {
-    User.findOne({ email: req.body.email }, (error, user) => {
-      if (error) {
-        res.status(500).json({
-          message: 'Internal Server Error!',
-          error: true,
-        });
-      } else if (user) {
-        res.status(200).json({ user });
-      }
-    });
+    const id = req.params.id;
+
+    const user = await User.findById(id, '-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not Found', error: true });
+    }
+
+    res.status(200).json({ user, error: false });
   };
 
   static ManageFavorites = async (req, res) => {
+    const id = req.params.id;
+    const { drinkId } = req.body;
+
+    const user = await User.findById(id, '-password');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not Found', error: true });
+    }
+
     let newFavorites = [];
 
-    User.findOne({ email: req.body.email }, (error, user) => {
-      if (error) {
-        res.status(500).json({
-          message: 'Internal Server Error!',
-          error: true,
-        });
-      } else if (user) {
-        user.favorites.map((drinkId) => {
-          if (drinkId != req.body.drinkId) {
-            newFavorites.push(drinkId);
-          }
-        });
-        if (newFavorites.length === user.favorites.length) {
-          newFavorites.push(req.body.drinkId);
-        }
-        User.updateOne(
-          { email: req.body.email },
-          { favorites: [...newFavorites] },
-          (error, resp) => {
-            if (error) {
-              res.status(500).json({
-                message: 'Internal Server Error!',
-                error: true,
-              });
-            } else if (resp) {
-              User.findOne({ email: req.body.email }, (error, userUpdated) => {
-                if (error) {
-                  res.status(500).json({
-                    message: 'Internal Server Error!',
-                    error: true,
-                  });
-                } else if (userUpdated) {
-                  res.status(200).json({ user: userUpdated });
-                }
-              });
-            }
-          },
-        );
+    user.favorites.map((favorite) => {
+      if (drinkId != favorite) {
+        newFavorites.push(favorite);
       }
     });
+
+    try {
+      const userUpdated = await User.updateOne(
+        { _id: id },
+        { favorites: [...newFavorites] },
+      );
+      res.status(200).json({ userUpdated, error: false });
+    } catch (error) {
+      res.status(500).json({
+        message: 'Internal Server Error! Try again later!',
+        error: true,
+      });
+    }
   };
 };
