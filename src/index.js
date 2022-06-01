@@ -1,10 +1,12 @@
 //-- Configurações Iniciais --//
+require('dotenv').config();
 const path = require('path');
-const express = require('express');
-const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const exphbs = require('express-handlebars');
 
 const ApiRoutes = require('./routes/api.js');
 const LoginRoutes = require('./routes/login.js');
@@ -24,8 +26,6 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.static('public'));
 app.set('view engine', 'handlebars');
 app.use(cors());
-
-dotenv.config();
 
 //-- Conectar com MongoDbAtlas --//
 mongoose
