@@ -8,10 +8,10 @@ module.exports = class ApiController {
     const user = await User.findById(id, '-password');
 
     if (!user) {
-      return res.status(404).json({ message: 'User not Found', error: true });
+      return res.status(404).json({ message: 'User not Found' });
     }
 
-    res.status(200).json({ user, error: false });
+    res.status(200).json({ user });
   };
 
   static ManageFavorites = async (req, res) => {
@@ -21,27 +21,28 @@ module.exports = class ApiController {
     const user = await User.findById(id, '-password');
 
     if (!user) {
-      return res.status(404).json({ message: 'User not Found', error: true });
+      return res.status(404).json({ message: 'User not Found' });
     }
 
-    let newFavorites = [];
+    let newFavorites = [...user.favorites];
 
-    user.favorites.map((favorite) => {
-      if (drinkId != favorite) {
-        newFavorites.push(favorite);
-      }
-    });
+    if (newFavorites.includes(drinkId)) {
+      const index = newFavorites.indexOf(drinkId);
+      newFavorites.splice(index, 1);
+    } else {
+      newFavorites.push(drinkId);
+    }
 
     try {
-      const userUpdated = await User.updateOne(
+      const update = await User.updateOne(
         { _id: id },
-        { favorites: [...newFavorites] },
+        { favorites: newFavorites },
       );
-      res.status(200).json({ userUpdated, error: false });
+      const userUpdated = await User.findById(id, '-password');
+      res.status(200).json({ user: userUpdated });
     } catch (error) {
       res.status(500).json({
         message: 'Internal Server Error! Try again later!',
-        error: true,
       });
     }
   };

@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const User = require('../models/user');
 
@@ -9,14 +10,12 @@ module.exports = class LoginApiController {
     if (!email) {
       return res.status(422).json({
         message: 'The Email is required!',
-        error: true,
       });
     }
 
     if (!password) {
       return res.status(422).json({
         message: 'The Password is required!',
-        error: true,
       });
     }
 
@@ -26,7 +25,6 @@ module.exports = class LoginApiController {
     if (!user) {
       return res.status(404).json({
         message: 'User not Found!',
-        error: true,
       });
     }
 
@@ -35,8 +33,7 @@ module.exports = class LoginApiController {
 
     if (!checkPassword) {
       return res.status(422).json({
-        message: 'Wrong Password',
-        error: true,
+        message: 'Wrong Password!',
       });
     }
 
@@ -47,18 +44,19 @@ module.exports = class LoginApiController {
           id: user._id,
         },
         secret,
-        {
-          expiresIn: '18000s',
-        },
+        // {
+        //   expiresIn: '18000s',
+        // },
       );
 
+      const userFiltered = await User.findOne({ email: email }, '-password');
       res
         .status(200)
-        .json({ message: 'Logged with Success', error: false, token });
+        .json({ message: 'Logged with Success', token, user: userFiltered });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: 'Internal Server Error! Try again later!',
-        error: true,
       });
     }
   };
@@ -69,14 +67,12 @@ module.exports = class LoginApiController {
     if (!email) {
       return res.status(422).json({
         message: 'The Email is required!',
-        error: true,
       });
     }
 
     if (!password) {
       return res.status(422).json({
         message: 'The Password is required!',
-        error: true,
       });
     }
 
@@ -86,7 +82,6 @@ module.exports = class LoginApiController {
     if (userExists) {
       return res.status(422).json({
         message: 'This Email is Already in Use!',
-        error: true,
       });
     }
 
@@ -109,7 +104,6 @@ module.exports = class LoginApiController {
     } catch (error) {
       res.status(500).json({
         message: 'Internal Server Error! Try again later!',
-        error: true,
       });
     }
   };
