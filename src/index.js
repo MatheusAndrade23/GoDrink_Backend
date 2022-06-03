@@ -12,6 +12,8 @@ const ApiRoutes = require('./routes/api.js');
 const LoginRoutes = require('./routes/login.js');
 const DefaultRoute = require('./routes/default.js');
 
+const { IncrementRequests } = require('./middlewares/IncrementRequests');
+
 const app = express();
 
 app.engine(
@@ -49,8 +51,8 @@ app.use(
 app.use(express.json());
 
 //-- Rotas --//
-app.use('/drink/', ApiRoutes);
-app.use('/login/', LoginRoutes);
+app.use('/drink/', IncrementRequests, ApiRoutes);
+app.use('/login/', IncrementRequests, LoginRoutes);
 app.use('/', DefaultRoute);
 
 //-- Entregar uma  Porta --//
