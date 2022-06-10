@@ -2,13 +2,13 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .container {
   height: 100%;
   width: 100%;
-  color: #EEEEEE;
+  color: #eeeeee;
   background-color: #222831;
   display: flex;
   align-items: center;
@@ -28,23 +28,23 @@
 }
 .container a {
   margin-top: 10px;
-  color: #EEEEEE;
+  color: #eeeeee;
 }
 .container div {
   display: flex;
   position: absolute;
   bottom: 20px;
   right: 20px;
-  color: #00ADB5;
+  color: #00adb5;
 }
 .container div p {
   padding: 5px;
 }
 .container div span {
-  color: #EEEEEE;
+  color: #eeeeee;
   padding: 5px;
-  border: 1px solid #393E46;
-  background-color: #393E46;
+  border: 1px solid #393e46;
+  background-color: #393e46;
   border-radius: 10px;
 }
 

@@ -25,7 +25,7 @@ app.engine(
 );
 
 app.set('views', path.join(__dirname, '/views'));
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'handlebars');
 app.use(cors());
 
