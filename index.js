@@ -8,11 +8,11 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 
-const ApiRoutes = require('./routes/api.js');
-const LoginRoutes = require('./routes/login.js');
-const DefaultRoute = require('./routes/default.js');
+const ApiRoutes = require('./src/routes/api.js');
+const LoginRoutes = require('./src/routes/login.js');
+const DefaultRoute = require('./src/routes/default.js');
 
-const { IncrementRequests } = require('./middlewares/IncrementRequests');
+const { IncrementRequests } = require('./src/middlewares/IncrementRequests');
 
 const app = express();
 
