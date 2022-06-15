@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+const mailer = require('../modules/mailer');
 const User = require('../models/user');
 
 module.exports = class LoginApiController {
@@ -20,7 +22,7 @@ module.exports = class LoginApiController {
     }
 
     //-- Check if User exists --//
-    const user = await User.findOne({ email: email });
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(404).json({
@@ -49,7 +51,7 @@ module.exports = class LoginApiController {
         // },
       );
 
-      const userFiltered = await User.findOne({ email: email }, '-password');
+      const userFiltered = await User.findOne({ email }, '-password');
       res
         .status(200)
         .json({ message: 'Logged with Success', token, user: userFiltered });
@@ -77,7 +79,7 @@ module.exports = class LoginApiController {
     }
 
     //-- Check if User exists --//
-    const userExists = await User.findOne({ email: email });
+    const userExists = await User.findOne({ email });
 
     if (userExists) {
       return res.status(422).json({
@@ -106,5 +108,80 @@ module.exports = class LoginApiController {
         message: 'Internal Server Error! Try again later!',
       });
     }
+  };
+
+  static ForgotPassword = async (req, res) => {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(422).json({
+        message: 'The Email is required!',
+      });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const token = crypto.randomBytes(20).toString('hex');
+
+    const now = new Date();
+    now.setHours(now.getHours() + 5);
+
+    await User.findByIdAndUpdate(user.id, {
+      $set: {
+        passwordResetToken: token,
+        passwordResetExpires: now,
+      },
+    });
+
+    mailer.sendMail(
+      {
+        to: email,
+        from: 'account_management@godrink.com',
+        template: 'mail/forgot_password',
+        context: { token },
+      },
+      (err) => {
+        if (err) {
+          return res
+            .status(400)
+            .json({ message: 'Something went wrong, try again later!' });
+        }
+
+        return res.status(200).json({ message: 'Email sent!' });
+      },
+    );
+  };
+
+  static ResetPassword = async (req, res) => {
+    const { email, token, password } = req.body;
+
+    const user = await User.findOne({ email }).select(
+      '+passwordResetToken passwordExpires',
+    );
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    if (token !== user.passwordResetToken) {
+      res.status(400).json({ message: 'Invalid Token' });
+    }
+
+    const now = new Date();
+
+    if (now > user.passwordResetExpires) {
+      res.status(400).json({ message: 'Token Expired' });
+    }
+
+    const salt = await bcrypt.genSalt(12);
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    await User.findOneAndUpdate({email}, password: passwordHash);
+
+    return res.status(200).json({ message: 'New password generated!' });
   };
 };
