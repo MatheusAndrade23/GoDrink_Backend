@@ -3,7 +3,6 @@
     "defaultpage",
     "exphbs",
     "godrink",
-    "mailtrap",
     "middlewares",
     "preconnect",
     "signin"
