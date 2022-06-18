@@ -13,6 +13,7 @@ module.exports = class ApiController {
 
       res.status(200).json({ user });
     } catch (error) {
+      console.log(error);
       res
         .status(400)
         .json({ message: 'Something went wrong, try again later!' });
@@ -45,6 +46,7 @@ module.exports = class ApiController {
       const userUpdated = await User.findById(id, '-password');
       res.status(200).json({ user: userUpdated });
     } catch (error) {
+      console.log(error);
       res
         .status(400)
         .json({ message: 'Something went wrong, try again later!' });

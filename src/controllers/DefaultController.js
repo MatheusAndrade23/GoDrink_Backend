@@ -7,6 +7,7 @@ module.exports = class ApiController {
       const requests = await Requests.findOne({ index: 1 });
       res.render('pages/defaultpage', { number: requests.requests });
     } catch (error) {
+      console.log(error);
       res.render('pages/defaultpage', { number: 'Error' });
     }
   };

@@ -13,6 +13,7 @@ module.exports.checkAuth = (req, res, next) => {
     jwt.verify(token, secret);
     next();
   } catch (error) {
+    console.log(error);
     res.status(400).json({ message: 'Invalid Token' });
   }
 };
