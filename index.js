@@ -7,11 +7,12 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 
-const ApiRoutes = require('./src/routes/api.js');
-const AuthRoutes = require('./src/routes/auth.js');
-const DefaultRoute = require('./src/routes/default.js');
+const ApiRoutes = require('./src/routes/api');
+const AuthRoutes = require('./src/routes/auth');
+const DefaultRoute = require('./src/routes/default');
 
 const { IncrementRequests } = require('./src/middlewares/IncrementRequests');
+const config = require('./src/config/index');
 
 const app = express();
 
@@ -26,7 +27,7 @@ app.engine(
 app.set('views', path.join(__dirname, '/src/views'));
 app.use(express.static(__dirname + '/src/public'));
 app.set('view engine', 'handlebars');
-app.use(cors());
+app.use(cors(config.options));
 
 mongoose
   .connect(process.env.DB_CONFIG, {

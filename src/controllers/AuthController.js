@@ -51,11 +51,6 @@ module.exports = class LoginApiController {
       res
         .status(200)
         .json({ message: 'Logged with Success', token, user: userFiltered });
-
-      console.log(error);
-      res.status(500).json({
-        message: 'Internal Server Error! Try again later!',
-      });
     } catch (error) {
       console.log(error);
       return res
