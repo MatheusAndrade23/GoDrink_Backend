@@ -22,7 +22,7 @@ module.exports = class ApiController {
 
   static ManageFavorites = async (req, res) => {
     const id = req.params.id;
-    const { drinkId } = req.body;
+    const { drink, drinkId } = req.body;
 
     try {
       const user = await User.findById(id, '-password');
@@ -32,16 +32,20 @@ module.exports = class ApiController {
       }
 
       let newFavorites = [...user.favorites];
+      let newFavoritesInfo = [...user.favoritesInfo];
 
       if (newFavorites.includes(drinkId)) {
         const index = newFavorites.indexOf(drinkId);
         newFavorites.splice(index, 1);
+        newFavoritesInfo.splice(index, 1);
       } else {
         newFavorites.push(drinkId);
+        newFavoritesInfo.push(drink);
       }
+
       const update = await User.updateOne(
         { _id: id },
-        { favorites: newFavorites },
+        { favorites: newFavorites, favoritesInfo: newFavoritesInfo },
       );
       const userUpdated = await User.findById(id, '-password');
       res.status(200).json({ user: userUpdated });
