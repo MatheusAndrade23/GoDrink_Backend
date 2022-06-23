@@ -49,7 +49,7 @@ app.use(
 app.use(express.json());
 
 app.use('/drink/', IncrementRequests, ApiRoutes);
-app.use('/login/', IncrementRequests, AuthRoutes);
+app.use('/auth/', IncrementRequests, AuthRoutes);
 app.use('/', DefaultRoute);
 
 app.listen(process.env.PORT || 5000, () => {

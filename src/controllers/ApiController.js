@@ -43,7 +43,7 @@ module.exports = class ApiController {
         newFavoritesInfo.push(drink);
       }
 
-      const update = await User.updateOne(
+      await User.updateOne(
         { _id: id },
         { favorites: newFavorites, favoritesInfo: newFavoritesInfo },
       );
