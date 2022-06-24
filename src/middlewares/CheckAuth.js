@@ -5,7 +5,9 @@ module.exports.CheckAuth = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Access Denied' });
+    return res
+      .status(401)
+      .json({ enMessage: 'Access Denied', ptBrMessage: 'Acesso negado' });
   }
 
   try {
@@ -14,6 +16,8 @@ module.exports.CheckAuth = (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    res.status(400).json({ message: 'Invalid Token' });
+    res
+      .status(400)
+      .json({ enMessage: 'Invalid Token', ptBrMessage: 'Token Inválido' });
   }
 };

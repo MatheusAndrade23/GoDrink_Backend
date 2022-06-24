@@ -1,9 +1,7 @@
 require('dotenv').config();
 const path = require('path');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const exphbs = require('express-handlebars');
 
@@ -29,6 +27,13 @@ app.use(express.static(__dirname + '/src/public'));
 app.set('view engine', 'handlebars');
 app.use(cors(config.options));
 
+app.use(
+  express.urlencoded({
+    extended: true,
+  }),
+);
+app.use(express.json());
+
 mongoose
   .connect(process.env.DB_CONFIG, {
     useNewUrlParser: true,
@@ -37,16 +42,9 @@ mongoose
   .then(() => {
     console.log('Conectado com MongoDB Atlas!');
   })
-  .catch((err) => {
-    console.log(err.message);
+  .catch((error) => {
+    console.log(error.message);
   });
-
-app.use(
-  express.urlencoded({
-    extended: true,
-  }),
-);
-app.use(express.json());
 
 app.use('/drink/', IncrementRequests, ApiRoutes);
 app.use('/auth/', IncrementRequests, AuthRoutes);

@@ -8,15 +8,19 @@ module.exports = class ApiController {
       const user = await User.findById(id, '-password');
 
       if (!user) {
-        return res.status(404).json({ message: 'User not Found' });
+        return res.status(404).json({
+          enMessage: 'User not Found',
+          ptBrMessage: 'Usuário não encontrado',
+        });
       }
 
       res.status(200).json({ user });
     } catch (error) {
       console.log(error);
-      res
-        .status(400)
-        .json({ message: 'Something went wrong, try again later!' });
+      res.status(400).json({
+        enMessage: 'Something went wrong, try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
+      });
     }
   };
 
@@ -28,7 +32,10 @@ module.exports = class ApiController {
       const user = await User.findById(id, '-password');
 
       if (!user) {
-        return res.status(404).json({ message: 'User not Found' });
+        return res.status(404).json({
+          enMessage: 'User not Found',
+          ptBrMessage: 'Usuário não encontrado',
+        });
       }
 
       let newFavorites = [...user.favorites];
@@ -51,9 +58,10 @@ module.exports = class ApiController {
       res.status(200).json({ user: userUpdated });
     } catch (error) {
       console.log(error);
-      res
-        .status(400)
-        .json({ message: 'Something went wrong, try again later!' });
+      res.status(400).json({
+        enMessage: 'Something went wrong, try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
+      });
     }
   };
 };

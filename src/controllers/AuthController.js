@@ -10,13 +10,15 @@ module.exports = class LoginApiController {
 
     if (!email) {
       return res.status(422).json({
-        message: 'The Email is required!',
+        enMessage: 'The Email is required!',
+        ptBrMessage: 'O email é obrigatório!',
       });
     }
 
     if (!password) {
       return res.status(422).json({
-        message: 'The Password is required!',
+        enMessage: 'The Password is required!',
+        ptBrMessage: 'A senha é obrigatória!',
       });
     }
 
@@ -25,7 +27,8 @@ module.exports = class LoginApiController {
 
       if (!user) {
         return res.status(404).json({
-          message: 'User not Found!',
+          enMessage: 'User not Found!',
+          ptBrMessage: 'Usuário não encontrado!',
         });
       }
 
@@ -33,7 +36,8 @@ module.exports = class LoginApiController {
 
       if (!checkPassword) {
         return res.status(422).json({
-          message: 'Wrong Password!',
+          enMessage: 'Wrong Password!',
+          ptBrMessage: 'Senha incorreta!',
         });
       }
 
@@ -49,14 +53,18 @@ module.exports = class LoginApiController {
       );
 
       const userFiltered = await User.findOne({ email }, '-password');
-      res
-        .status(200)
-        .json({ message: 'Logged with Success', token, user: userFiltered });
+      res.status(200).json({
+        enMessage: 'Logged with Success',
+        ptBrMessage: 'Autenticado com sucesso!',
+        token,
+        user: userFiltered,
+      });
     } catch (error) {
       console.log(error);
-      return res
-        .status(400)
-        .json({ message: 'Something went wrong, try again later!' });
+      return res.status(400).json({
+        enMessage: 'Something went wrong, try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
+      });
     }
   };
 
@@ -65,13 +73,15 @@ module.exports = class LoginApiController {
 
     if (!email) {
       return res.status(422).json({
-        message: 'The Email is required!',
+        enMessage: 'The Email is required!',
+        ptBrMessage: 'O email é obrigatório!',
       });
     }
 
     if (!password) {
       return res.status(422).json({
-        message: 'The Password is required!',
+        enMessage: 'The Password is required!',
+        ptBrMessage: 'A senha é obrigatória!',
       });
     }
 
@@ -80,7 +90,8 @@ module.exports = class LoginApiController {
 
       if (userExists) {
         return res.status(422).json({
-          message: 'This Email is Already in Use!',
+          enMessage: 'This Email is Already in Use!',
+          ptBrMessage: 'Este email já está em uso!',
         });
       }
 
@@ -96,13 +107,14 @@ module.exports = class LoginApiController {
       User.create(newUser);
 
       res.status(201).json({
-        message: 'User Created with Success!',
-        error: false,
+        enMessage: 'User Created with Success!',
+        ptBrMessage: 'Usuário criado com sucesso!',
       });
     } catch (error) {
       console.log(error);
       res.status(500).json({
-        message: 'Internal Server Error! Try again later!',
+        enMessage: 'Internal Server Error! Try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
       });
     }
   };
@@ -112,7 +124,8 @@ module.exports = class LoginApiController {
 
     if (!email) {
       return res.status(422).json({
-        message: 'The Email is required!',
+        enMessage: 'The Email is required!',
+        ptBrMessage: 'O email é obrigatório!',
       });
     }
 
@@ -121,7 +134,8 @@ module.exports = class LoginApiController {
 
       if (!user) {
         return res.status(404).json({
-          message: 'User not Found!',
+          enMessage: 'User not Found!',
+          ptBrMessage: 'Usuário não encontrado!',
         });
       }
 
@@ -147,12 +161,16 @@ module.exports = class LoginApiController {
 
       await sendMail(mail);
 
-      res.status(200).json({ message: 'Check your mail box!' });
+      res.status(200).json({
+        enMessage: 'Check your mail box!',
+        ptBrMessage: 'Verifique sua caixa de email!',
+      });
     } catch (error) {
       console.log(error);
-      return res
-        .status(400)
-        .json({ message: 'Something went wrong, try again later!' });
+      return res.status(400).json({
+        enMessage: 'Something went wrong, try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
+      });
     }
   };
 
@@ -161,19 +179,22 @@ module.exports = class LoginApiController {
 
     if (!email) {
       return res.status(422).json({
-        message: 'The Email is required!',
+        enMessage: 'The Email is required!',
+        ptBrMessage: 'O email é obrigatório!',
       });
     }
 
     if (!token) {
       return res.status(422).json({
-        message: 'The Token is required!',
+        enMessage: 'The Token is required!',
+        ptBrMessage: 'O token é obrigatório!',
       });
     }
 
     if (!password) {
       return res.status(422).json({
-        message: 'The password is required!',
+        enMessage: 'The password is required!',
+        ptBrMessage: 'A senha é obrigatória!',
       });
     }
 
@@ -182,7 +203,9 @@ module.exports = class LoginApiController {
       jwt.verify(token, secret);
     } catch (error) {
       console.log(error);
-      res.status(400).json({ message: 'Invalid Token' });
+      res
+        .status(400)
+        .json({ enMessage: 'Invalid Token', ptBrMessage: 'Token inválido' });
     }
 
     try {
@@ -190,8 +213,6 @@ module.exports = class LoginApiController {
       const passwordHash = await bcrypt.hash(password, salt);
 
       await User.updateOne({ email }, { password: passwordHash });
-
-      const userUpdated = await User.findOne({ email }, '-password');
 
       const mail = {
         to: 'matheusandrade.ma2003@gmail.com',
@@ -202,12 +223,15 @@ module.exports = class LoginApiController {
 
       await sendMail(mail);
 
+      const userUpdated = await User.findOne({ email }, '-password');
+
       res.status(200).json({ user: userUpdated });
     } catch (error) {
       console.log(error);
-      return res
-        .status(400)
-        .json({ message: 'Something went wrong, try again later!' });
+      return res.status(400).json({
+        enMessage: 'Something went wrong, try again later!',
+        ptBrMessage: 'Algo deu errado, tente novamente mais tarde!',
+      });
     }
   };
 };
