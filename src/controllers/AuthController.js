@@ -27,8 +27,8 @@ module.exports = class LoginApiController {
 
       if (!user) {
         return res.status(404).json({
-          enMessage: 'User not Found!',
-          ptBrMessage: 'Usuário não encontrado!',
+          enMessage: 'Wrong user or password!',
+          ptBrMessage: 'Usuário ou senha incorretos!',
         });
       }
 
@@ -36,8 +36,8 @@ module.exports = class LoginApiController {
 
       if (!checkPassword) {
         return res.status(422).json({
-          enMessage: 'Wrong Password!',
-          ptBrMessage: 'Senha incorreta!',
+          enMessage: 'Wrong user or password!',
+          ptBrMessage: 'Usuário ou senha incorretos!',
         });
       }
 
