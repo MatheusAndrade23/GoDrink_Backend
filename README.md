@@ -112,7 +112,7 @@ _<h3>Mudança de Tema 🎨</h3>_
 
 _<h3>Mudança de Língua 🌎</h3>_
 
-#### A biblioteca <a href="https://www.npmjs.com/package/react-i18next">React I18Next</a> permite a utilização de diferentes línguas no projeto. Como a API <a href="https://www.thecocktaildb.com/api.php">The CocktailDB</a> responde em inglês, este idioma se torna praticamente obrigatório. Para o o português, não encontrei uma maneira viável de traduzir os textos vindos da API, então essa funcionalidade ainda não está finalizada. A língua escolhida pelo usuário fica salva no local storage e independe de autenticação, assim como o tema.
+#### A biblioteca <a href="https://www.npmjs.com/package/react-i18next">React I18Next</a> permite a utilização de diferentes línguas no projeto. Como a API <a href="https://www.thecocktaildb.com/api.php">The CocktailDB</a> responde em inglês, este idioma se torna praticamente obrigatório. Para o português, não encontrei uma maneira viável de traduzir os textos vindos da API, então essa funcionalidade ainda não está finalizada. A língua escolhida pelo usuário fica salva no local storage e independe de autenticação, assim como o tema.
 
 <br>
 
