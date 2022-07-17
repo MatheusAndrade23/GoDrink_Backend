@@ -28,6 +28,13 @@ module.exports = class ApiController {
     const id = req.params.id;
     const { drink, drinkId } = req.body;
 
+    if (!drink || !drinkId) {
+      return res.status(400).json({
+        enMessage: 'The "drink" and "drinkId" cannot be empty!',
+        ptBrMessage: 'O "drink" e "drinkId não podem estar vazios"!',
+      });
+    }
+
     try {
       const user = await User.findById(id, '-password');
 
