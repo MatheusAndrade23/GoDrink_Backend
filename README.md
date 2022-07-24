@@ -16,7 +16,8 @@
 
 <p align="center">
   <a href="hthttps://go-drink.vercel.app/">Clique para visitar o site!</a> -
-  <a href="https://github.com/MatheusAndrade23/Go_Drink">Clique para ver o Frontend</a>
+  <a href="https://github.com/MatheusAndrade23/Go_Drink_Next">Clique para visitar a versão em Next!</a> -
+  <a href="https://github.com/MatheusAndrade23/Go_Drink_React">Clique para visitar a versão em React!</a>
 </p>
 
 ---
@@ -37,10 +38,9 @@ _<h3 id="trocando">Adicionando aos favoritos! ⭐</h3>_
 
 <h2 id="tecnologias">Tecnologias Utilizadas 🛠</h2>
 
-#### FrontEnd: `ReactJS!`
+#### FrontEnd: `NextJS!`
 
-- React-Router-Dom
-- I18Next
+- Next SEO
 - Flag Icons
 - React Icons
 - Axios
@@ -68,7 +68,7 @@ _<h3 id="trocando">Adicionando aos favoritos! ⭐</h3>_
   <img align="center" alt="npm" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" />
   <img align="center" alt="Js" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-plain.svg">
   <img align="center" alt="Sass" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg">
-  <img align="center" alt="ReactJS" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
+  <img align="center" alt="NextJS" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg">
   <img align="center" alt="Jest" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg">
   <img align="center" alt="NodeJS" height="35" width="45" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-plain.svg">
   <img align="center" alt="Express" height="35" width="45" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg">
@@ -112,7 +112,7 @@ _<h3>Mudança de Tema 🎨</h3>_
 
 _<h3>Mudança de Língua 🌎</h3>_
 
-#### A biblioteca <a href="https://www.npmjs.com/package/react-i18next">React I18Next</a> permite a utilização de diferentes línguas no projeto. Como a API <a href="https://www.thecocktaildb.com/api.php">The CocktailDB</a> responde em inglês, este idioma se torna praticamente obrigatório. Para o português, não encontrei uma maneira viável de traduzir os textos vindos da API, então essa funcionalidade ainda não está finalizada. A língua escolhida pelo usuário fica salva no local storage e independe de autenticação, assim como o tema.
+#### A biblioteca <a href="https://www.npmjs.com/package/react-i18next">React I18Next</a> permite a utilização de diferentes línguas no projeto. Como a API <a href="https://www.thecocktaildb.com/api.php">The CocktailDB</a> responde em inglês, este idioma se torna praticamente obrigatório. Para o português, não encontrei uma maneira viável de traduzir os textos vindos da API, então essa funcionalidade ainda não está finalizada. A língua escolhida pelo usuário fica salva no local storage e independe de autenticação, assim como o tema. (Disponível apenas na versão em React)
 
 <br>
 
