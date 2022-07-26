@@ -15,7 +15,7 @@
 <h3 align="center">É um site que fornece mais de 600 receitas de coquetéis do mundo todo, utilizando <a href="https://www.thecocktaildb.com/api.php">The CocktailDB API</a>. Possui tema dark, todos os textos estáticos estão disponíveis em português e inglês e você ainda pode listar suas bebidas favoritas.</h3>
 
 <p align="center">
-  <a href="hthttps://go-drink.vercel.app/">Clique para visitar o site!</a> -
+  <a href="https://go-drink-next.vercel.app/">Clique para visitar o site!</a> -
   <a href="https://github.com/MatheusAndrade23/Go_Drink_Next">Clique para visitar a versão em Next!</a> -
   <a href="https://github.com/MatheusAndrade23/Go_Drink_React">Clique para visitar a versão em React!</a>
 </p>
