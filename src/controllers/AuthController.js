@@ -70,6 +70,10 @@ module.exports = class LoginApiController {
 
   static Register = async (req, res) => {
     const { email, password } = req.body;
+    const emailRegex =
+      /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/gi;
+
+    const emailTested = emailRegex.test(email);
 
     if (!email) {
       return res.status(422).json({
@@ -82,6 +86,13 @@ module.exports = class LoginApiController {
       return res.status(422).json({
         enMessage: 'The Password is required!',
         ptBrMessage: 'A senha é obrigatória!',
+      });
+    }
+
+    if (!emailTested) {
+      return res.status(422).json({
+        enMessage: 'Invalid Email!',
+        ptBrMessage: 'Email inválido!',
       });
     }
 
@@ -151,7 +162,7 @@ module.exports = class LoginApiController {
       );
 
       const mail = {
-        to: 'matheusandrade.ma2003@gmail.com',
+        to: email,
         subject: 'Password Recover - Go Drink',
         html: `<h2>HI!</h2><p>
         <a href='https://go-drink-next.vercel.app/password/${token}/${email}'>Click Here</a> to recover your password.</p>
@@ -215,7 +226,7 @@ module.exports = class LoginApiController {
       await User.updateOne({ email }, { password: passwordHash });
 
       const mail = {
-        to: 'matheusandrade.ma2003@gmail.com',
+        to: email,
         subject: 'Password Recover - Go Drink',
         html: '<h2>HI!</h2><p>Password changed successfully!</p>',
         text: 'Password changed successfully',
