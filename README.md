@@ -16,8 +16,8 @@
 
 <p align="center">
   <a href="https://go-drink-next.vercel.app/">Clique para visitar o site!</a> -
-  <a href="https://github.com/MatheusAndrade23/Go_Drink_Next">Clique para visitar a versão em Next!</a> -
-  <a href="https://github.com/MatheusAndrade23/Go_Drink_React">Clique para visitar a versão em React!</a>
+  <a href="https://github.com/MatheusAndrade23/Go_Drink_Next">Clique para ver o Front-End!</a>
+  <!-- <a href="https://github.com/MatheusAndrade23/Go_Drink_React">Clique para visitar a versão em React!</a> -->
 </p>
 
 ---
@@ -45,7 +45,6 @@ _<h3 id="trocando">Adicionando aos favoritos! ⭐</h3>_
 - React Icons
 - Axios
 - Styled Components
-- Jest Styled Components
 - React Elastic Carousel
 - Context API
 - React Hooks
@@ -85,7 +84,6 @@ _<h3 id="trocando">Adicionando aos favoritos! ⭐</h3>_
 - ✔️ Responsivo
 - ✔️ Ferramenta de pesquisa
 - ✔️ Mudança de Tema
-- ✔️ Mudança de Língua
 - ✔️ Recuperação de Senha
 - ✔️ Lista de favoritos
 - ✔️ Ver detalhes da Bebida Escolhida
@@ -108,13 +106,11 @@ _<h3>Mudança de Tema 🎨</h3>_
 
 #### A aplicação conta com dois temas (claro e escuro), e um botão para a mudança fixo na tela. O tema escuro é renderizado por padrão, mas o tema escolhido pelo usuário fica salvo no local storage sem a necessidade de criar uma conta.
 
-##
-
-_<h3>Mudança de Língua 🌎</h3>_
+<!-- _<h3>Mudança de Língua 🌎</h3>_
 
 #### A biblioteca <a href="https://www.npmjs.com/package/react-i18next">React I18Next</a> permite a utilização de diferentes línguas no projeto. Como a API <a href="https://www.thecocktaildb.com/api.php">The CocktailDB</a> responde em inglês, este idioma se torna praticamente obrigatório. Para o português, não encontrei uma maneira viável de traduzir os textos vindos da API, então essa funcionalidade ainda não está finalizada. A língua escolhida pelo usuário fica salva no local storage e independe de autenticação, assim como o tema. (Disponível apenas na versão em React)
 
-<br>
+<br> -->
 
 ---
 
