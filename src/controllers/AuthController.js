@@ -165,9 +165,9 @@ module.exports = class LoginApiController {
         to: email,
         subject: 'Password Recover - Go Drink',
         html: `<h2>HI!</h2><p>
-        <a href='https://go-drink-next.vercel.app/password/${token}/${email}'>Click Here</a> to recover your password.</p>
+        <a href='https://go-drink.vercel.app/password/${token}/${email}'>Click Here</a> to recover your password.</p>
         <p>If you didn't request it, please ignore it and don't share with anyone!</p>`,
-        text: `Access this link to recover your password: https://go-drink-next.vercel.app/password/${token}/${email}`,
+        text: `Access this link to recover your password: https://go-drink.vercel.app/password/${token}/${email}`,
       };
 
       await sendMail(mail);
